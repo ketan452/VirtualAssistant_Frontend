@@ -7,15 +7,16 @@ function UserContext({children}) {
     const [frontendImage,setFrontendImage]=useState(null)
      const [backendImage,setBackendImage]=useState(null)
      const [selectedImage,setSelectedImage]=useState(null)
-    const handleCurrentUser=async ()=>{
-        try {
-            const result=await axios.get(`${serverUrl}/api/user/current`,{withCredentials:true})
-            setUserData(result.data)
-            console.log(result.data)
-        } catch (error) {
-            console.log(error)
-        }
+  const handleCurrentUser=async ()=>{
+    try {
+      const result=await axios.get(`${serverUrl}/api/user/current`,{withCredentials:true})
+      setUserData(result.data)
+      console.log('Fetched user data:', result.data);
+      console.log('Assistant image:', result.data?.assistantImage);
+    } catch (error) {
+      console.log(error)
     }
+  }
 
     const getGeminiResponse=async (command)=>{
 try {

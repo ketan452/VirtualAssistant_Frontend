@@ -43,9 +43,14 @@ function Home() {
   const speak = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'hi-IN';
-    const voices = window.speechSynthesis.getVoices();
-    const hindiVoice = voices.find(v => v.lang === 'hi-IN');
-    if (hindiVoice) utterance.voice = hindiVoice;
+    let voices = window.speechSynthesis.getVoices();
+    let selectedVoice = voices.find(v => v.lang === 'hi-IN');
+    if (!selectedVoice) {
+      // Fallback to English if Hindi not available
+      selectedVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
+      utterance.lang = selectedVoice?.lang || 'en-US';
+    }
+    if (selectedVoice) utterance.voice = selectedVoice;
 
     isSpeakingRef.current = true;
     utterance.onend = () => {
