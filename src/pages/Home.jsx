@@ -164,9 +164,9 @@ function Home() {
 
       {/* Desktop buttons removed, now only hamburger menu shows them */}
 
-      {/* Assistant Image */}
+      {/* Assistant Image with fallback */}
       <div className='w-[300px] h-[400px] flex justify-center items-center overflow-hidden rounded-4xl shadow-lg'>
-        <img src={userData?.assistantImage} alt="" className='h-full object-cover' />
+        <img src={userData?.assistantImage ? userData.assistantImage : aiImg} alt="Assistant" className='h-full object-cover' />
       </div>
 
       <h1 className='text-white text-[18px] font-semibold'>I'm {userData?.assistantName}</h1>
